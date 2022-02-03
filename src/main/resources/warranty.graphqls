@@ -1,0 +1,101 @@
+schema {
+ query: Query
+}
+
+type Query {
+fetchWarrantyForAp(vin : String!) : WarrantyCoverage
+fetchBaseInfoForEU(vin : String!, country : String!, language : String!) : WarrantyCoverageLookupResponse
+fetchExtendedInfoForEU(vin : String!) : ExtendedWarrantyCoverageResponse
+fetchWarrantyMEandAF(vin: String!, country: String!): WarrantyCoverageResponse
+}
+
+type ExtendedWarrantyCoverageResponse {
+ #Provides warranty contract Expiration Date.
+contractExpirationDate : String
+ #Provides warranty contract Expiration Distance Measure.
+contractExpirationDistanceMeasure : BigDecimal
+ #Provides warranty term Period Months.
+termPeriodMonths : String
+ #Provides type of contract.
+contractType : String
+#Provides Mileage Unit
+mileageUnit : String
+
+}
+
+type WarrantyCoverageLookupResponse {
+#Provides URl to redirect
+url : String
+#Provides end date for warranty
+warrantyEndDate : String
+}
+
+type WarrantyCoverage {
+#provides warranty extended service plan 
+extendedServicePlan : String
+ #Provides warranty contract Start Date.
+warrantyStartDate : String
+ #Provides warranty contract end Date.
+warrantyEndDate : String
+ #Provides warranty contract end mileage.
+warrantyEndMileage : Long
+ #Provides request status.
+requestStatus : RequestStatus
+value : [Data]
+
+}
+
+type Data {
+name : String
+type : String
+}
+
+type WarrantyCoverageResponse {
+
+serviceStatus : ServiceStatus
+contracts : [Contract!]
+
+}
+
+type ServiceStatus {
+status : String
+message : String
+}
+
+type Contract {
+
+contractExpirationDate : String
+contractExpirationDistanceMeasure : String
+termPeriodMonths : String
+coverageStart : String
+contractPlanCode : String
+contractProductName : String
+contractProductDescription : String
+planCountryCode : String
+mileageUnit : String
+contractState : String
+contractBusinessStatus : String
+contractID : String
+planYear : String
+nmbrOfRemainingServices : String
+nmbrOfPurchasedServices : String
+purchaserName : String
+driverName : [String!]
+deductible : String
+currencyCode : String
+coverageStartDate : String
+contractSignatureDate : String
+contractStartDistance : String
+options : [String!]
+roadSideAssistance : String
+rentalAmount : String
+rentalDays : String
+   
+}
+
+enum RequestStatus {
+ CURRENT
+ CACHED
+ UNAVAILABLE
+}
+

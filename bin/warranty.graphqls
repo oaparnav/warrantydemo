@@ -1,0 +1,85 @@
+schema {
+ query: Query
+}
+
+type Query {
+warrantyrAp(vin : String!) : WarrantyCoverage
+baseInfoEU(vin : String!, country : String!, language : String!) : WarrantyCoverageLookupResponse
+extendedInfoEU(vin : String!) : ExtendedWarrantyCoverageResponse
+warrantyMEandAF(vin: String!, country: String!): WarrantyCoverageResponse
+}
+
+type ExtendedWarrantyCoverageResponse {
+
+contractExpirationDate : String
+contractExpirationDistanceMeasure : BigDecimal
+termPeriodMonths : String
+contractType : String
+mileageUnit : String
+
+}
+
+type WarrantyCoverageLookupResponse {
+url : String
+warrantyEndDate : String
+}
+
+type WarrantyCoverage {
+
+extendedServicePlan : String
+warrantyStartDate : String
+warrantyEndDate : String
+warrantyEndMileage : Long
+requestStatus : RequestStatus
+
+}
+
+type WarrantyCoverageResponse {
+
+serviceStatus : ServiceStatus
+contracts : [Contract!]
+
+}
+
+type ServiceStatus {
+status : String
+message : String
+}
+
+type Contract {
+
+contractExpirationDate : String
+contractExpirationDistanceMeasure : String
+termPeriodMonths : String
+coverageStart : String
+contractPlanCode : String
+contractProductName : String
+contractProductDescription : String
+planCountryCode : String
+mileageUnit : String
+contractState : String
+contractBusinessStatus : String
+contractID : String
+planYear : String
+nmbrOfRemainingServices : String
+nmbrOfPurchasedServices : String
+purchaserName : String
+driverName : [String!]
+deductible : String
+currencyCode : String
+coverageStartDate : String
+contractSignatureDate : String
+contractStartDistance : String
+options : [String!]
+roadSideAssistance : String
+rentalAmount : String
+rentalDays : String
+   
+}
+
+enum RequestStatus {
+ CURRENT
+ CACHED
+ UNAVAILABLE
+}
+

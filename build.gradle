@@ -1,0 +1,51 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.3.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'java'
+}
+
+group = 'com.graphql'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('springCloudVersion', "Hoxton.SR7")
+}
+
+dependencies {
+	//implementation 'org.springframSework.boot:spring-boot-starter-oauth2-resource-server'
+	//implementation 'org.springframework.boot:spring-boot-starter-security'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'com.graphql-java:graphql-spring-boot-starter:5.0.2'	
+	implementation 'com.graphql-java:graphql-java-tools:5.2.4'
+	compile 'com.graphql-java:graphql-java:9.4'
+    //implementation "org.springframework.cloud:spring-cloud-starter-oauth2"
+	//implementation 'org.springframework.security:spring-security-jwt'
+	//implementation 'io.jsonwebtoken:jjwt:0.9.1'
+    //compile 'com.nimbusds:nimbus-jose-jwt:6.0.2'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') 
+    testImplementation 'junit:junit:4.13'
+     testImplementation "com.graphql-java:graphql-spring-boot-starter-test:5.0.2"
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+test {
+	useJUnitPlatform()
+}

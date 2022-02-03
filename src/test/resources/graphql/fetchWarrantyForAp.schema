@@ -1,0 +1,9 @@
+query {
+fetchWarrantyForAp(vin : "12345667") {
+	extendedServicePlan
+	warrantyStartDate
+	warrantyEndDate
+	warrantyEndMileage
+	requestStatus
+}
+}
